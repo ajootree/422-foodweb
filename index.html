@@ -1,7 +1,7 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"><meta name="theme-color" content="#233c28"><meta name="description" content="숲·바다·초원에서 먹이길을 연결하고 생태계의 균형을 되찾는 초등학생용 먹이그물 게임."><title>먹이그물 탐험대 · 숲·바다·초원</title><link rel="icon" href="./assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./styles.css?v=f1189ae249aa"><script defer src="./game.js?v=f1189ae249aa"></script></head><body><main id="forest-rescue">
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"><meta name="theme-color" content="#233c28"><meta name="description" content="숲·바다·초원에서 먹이길을 연결하고 생태계의 균형을 되찾는 초등학생용 먹이그물 게임."><title>먹이그물 탐험대 · 숲·바다·초원</title><link rel="icon" href="./assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./styles.css?v=3fc7eb55672e"><script defer src="./game.js?v=3fc7eb55672e"></script></head><body><main id="forest-rescue">
 <div class="fg-vignette"></div>
-<header class="fg-top"><button type="button" class="fg-brand fg-map-button" data-habitat-menu><span class="fg-subbrand">먹이그물 탐험대</span><span data-brand-name>숲을 잇다</span><span class="fg-world-count" data-world-count>1 / 3 환경 · 지도 ▾</span></button><div class="fg-location">햇살 숲<span data-day>0일째</span></div><div class="fg-player"><div class="fg-player-row"><span>🌿 생태계 균형</span><span data-forest-value>88%</span></div><div class="fg-global-track" role="meter" aria-label="안정된 생물의 비율" aria-valuemin="0" aria-valuemax="100" aria-valuenow="88" data-forest-meter><i data-forest-bar></i></div><div class="fg-xp-line"><span>✦ 연결 점수 <b data-score>0</b></span><span data-seeds>생명의 씨앗 ✦ 2</span></div></div><div class="fg-mission"><span class="fg-mission-icon" aria-hidden="true">🌿</span><div><span class="fg-roundtag" data-round-label>위기 1 / 3</span><strong data-clue>배고픈 여우를 구해줘!</strong><small data-hint>먹이길 3개를 잇고 균형을 6초 유지</small><div class="fg-phases" aria-label="숲의 세 위기"><span data-phase="0" class="active">1</span><span data-phase="1">2</span><span data-phase="2">3</span></div></div></header>
+<header class="fg-top"><div class="fg-brand fg-brand-panel"><button type="button" class="fg-title-button" data-habitat-menu aria-label="환경 지도 열기"><span class="fg-subbrand">먹이그물 탐험대</span><span data-brand-name>숲을 잇다</span><span class="fg-world-count" data-world-count>1 / 3 · 지도 ▾</span></button><button type="button" class="fg-settings-button" data-settings-open aria-label="설정 열기" title="설정">⚙</button></div><div class="fg-location">햇살 숲<span data-day>0일째</span></div><div class="fg-player"><div class="fg-player-row"><span>🌿 생태계 균형</span><span data-forest-value>88%</span></div><div class="fg-global-track" role="meter" aria-label="안정된 생물의 비율" aria-valuemin="0" aria-valuemax="100" aria-valuenow="88" data-forest-meter><i data-forest-bar></i></div><div class="fg-xp-line"><span>✦ 연결 점수 <b data-score>0</b></span><span data-seeds>생명의 씨앗 ✦ 2</span></div></div><div class="fg-mission"><span class="fg-mission-icon" aria-hidden="true">🌿</span><div><span class="fg-roundtag" data-round-label>위기 1 / 3</span><strong data-clue>배고픈 여우를 구해줘!</strong><small data-hint>먹이길 3개를 잇고 균형을 6초 유지</small><div class="fg-phases" aria-label="숲의 세 위기"><span data-phase="0" class="active">1</span><span data-phase="1">2</span><span data-phase="2">3</span></div></div></header>
 <!-- LIVE_HUD_START -->
 
 </div>
@@ -21,18 +21,26 @@
 </div>
 <div class="fg-inspect" data-inspect hidden><div class="fg-inspect-title"><span data-inspect-title></span><button type="button" class="fg-close" data-close>확인</button></div><div class="fg-inspect-details" data-inspect-details></div><div class="fg-supply-controls"><button type="button" class="fg-small" data-supply-minus aria-label="생산량 1칸 줄이기">−</button><strong data-supply-value>4칸</strong><button type="button" class="fg-small" data-supply-plus aria-label="생산량 1칸 늘리기">+</button></div><p>생산량이 늘면 생산자 그림도 늘어요.</p></div>
 <!-- LIVE_DOCK_START -->
-<div class="fg-dock"><div class="fg-status"><strong data-status>균형 유지 0 / 6초</strong><div class="fg-hold" data-hold-meter role="meter" aria-label="균형 유지 시간" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"><i data-hold-fill></i></div><div class="fg-toast" role="status" aria-live="polite" data-toast>먹는 동물을 고른 뒤 먹이 선택 · 선을 눌러 수정</div></div><div class="fg-controls"><button type="button" class="fg-small cursor-interaction" data-web aria-pressed="true">먹이길 숨김</button><button type="button" class="fg-small cursor-interaction" data-help>조작법</button><button type="button" class="fg-small cursor-interaction" data-heal>✦ 회복 2</button><button type="button" class="fg-small cursor-interaction" data-retry aria-label="이 기기의 저장 기록 초기화">초기화</button><button type="button" class="fg-play cursor-interaction" data-observe aria-pressed="false">▶ 숲 시작</button></div></div>
+<div class="fg-dock"><div class="fg-status"><strong data-status>균형 유지 0 / 6초</strong><div class="fg-hold" data-hold-meter role="meter" aria-label="균형 유지 시간" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"><i data-hold-fill></i></div><div class="fg-toast" role="status" aria-live="polite" data-toast>먹는 동물을 고른 뒤 먹이 선택 · 선을 눌러 수정</div></div><div class="fg-controls"><button type="button" class="fg-small cursor-interaction" data-web aria-pressed="true">먹이길 숨김</button><button type="button" class="fg-small cursor-interaction" data-help>조작법</button><button type="button" class="fg-small cursor-interaction" data-heal>✦ 회복 2</button><button type="button" class="fg-small cursor-interaction" data-retry aria-label="이번 판을 시작 상태로 되돌리기">다시하기</button><button type="button" class="fg-play cursor-interaction" data-observe aria-pressed="false">▶ 숲 시작</button></div></div>
 <!-- LIVE_DOCK_END -->
 
 <div class="fg-reset-overlay" data-reset-modal hidden>
   <section class="fg-reset-card" role="dialog" aria-modal="true" aria-labelledby="fg-reset-title" aria-describedby="fg-reset-description">
     <h2 id="fg-reset-title">정말 초기화할까요?</h2>
-    <p id="fg-reset-description">이 기기에 저장된 <strong>진행·점수·튜토리얼 기록</strong>이 모두 지워지고 처음부터 시작해요.</p>
+    <p id="fg-reset-description">이 게임의 <strong>숲·바다·초원 진행, 점수, 씨앗, 튜토리얼 기록</strong>이 모두 지워지고 처음부터 시작해요.</p>
     <label for="fg-reset-input">초기화하려면 <strong>초기화합니다</strong>를 입력하세요.</label>
     <input id="fg-reset-input" data-reset-input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" placeholder="초기화합니다">
     <p class="fg-reset-match" data-reset-match aria-live="polite">위 문구를 입력하면 초기화 버튼이 켜져요.</p>
     <div class="fg-reset-actions"><button type="button" class="fg-small" data-reset-cancel>취소하고 돌아가기</button><button type="button" class="fg-reset-confirm" data-reset-confirm disabled>모두 초기화</button></div>
   </section>
+</div>
+<div class="fg-settings-overlay" data-settings-panel hidden>
+ <section class="fg-settings-card" role="dialog" aria-modal="true" aria-labelledby="fg-settings-title">
+  <div class="fg-settings-heading"><h2 id="fg-settings-title">설정</h2><button type="button" class="fg-close" data-settings-close aria-label="설정 닫기">✕</button></div>
+  <p>진행 기록은 이 기기에 자동으로 저장돼요.</p>
+  <div class="fg-settings-reset-section"><h3>전체 기록 초기화</h3><p>숲·바다·초원의 진행, 점수, 씨앗, 튜토리얼 기록을 모두 지우고 처음부터 시작해요.</p><button type="button" class="fg-small" data-full-reset>전체 초기화</button><small>다음 확인창에서 ‘초기화합니다’를 입력해야 삭제돼요.</small></div>
+  <button type="button" class="fg-play" data-settings-return>게임으로 돌아가기</button>
+ </section>
 </div>
 <div class="fg-world-overlay" data-world-win hidden>
  <section class="fg-world-win-card" role="dialog" aria-modal="true" aria-labelledby="fg-world-win-title">
