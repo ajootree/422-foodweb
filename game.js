@@ -95,7 +95,7 @@ if(w){let spot=null;for(const t of [.5,.4,.6,.3,.7,.2,.8,.1,.9]){const u=1-t,anc
 if(running&&w&&live(a)&&live(b)&&!matchMedia('(prefers-reduced-motion: reduce)').matches){const particle=document.createElementNS(ns,'circle');particle.setAttribute('r','3.5');particle.setAttribute('fill','var(--gold)');particle.style.pointerEvents='none';const motion=document.createElementNS(ns,'animateMotion');motion.setAttribute('path',path);motion.setAttribute('dur','.85s');motion.setAttribute('repeatCount','indefinite');particle.append(motion);group.append(particle);}
 }positionEditor();}
 
-function enterNextPhase(){const before={...pop};round++;stable=0;pending=false;selected=null;selectedEdge='';editing=false;
+function enterNextPhase(){if(resetOpen){const token=generation;setTimeout(()=>{if(token===generation)enterNextPhase();},250);return;}const before={...pop};round++;stable=0;pending=false;selected=null;selectedEdge='';editing=false;
 if(round===1){edges=edges.filter(e=>e[1]==='fox');for(const id of ['rabbit','mouse','hopper','snail'])edges.push(['grass',id,1]);announce('새 위기 · 풀밭에 몰려왔어요!','공급 한도 3칸 · 먹이길 4개를 나눠주세요.');toast('같은 숲에 새로운 위기! 풀밭의 빨간 먹이길을 분산하세요.');}
 else{const eaten=edges.filter(e=>e[1]==='fox').map(e=>e[0]);extinctId=eaten.includes('hopper')?'hopper':eaten[eaten.length-1];pop[extinctId]=0;edges=edges.filter(e=>e[0]!==extinctId&&e[1]!==extinctId);announce(`새 위기 · ${data[extinctId].name}이 떠났어요!`,'남은 무리들로 먹이길을 복구하세요.');toast('동물과 개체 게이지는 그대로 이어져요. 끊긴 먹이길을 복구하세요.');}
 render(before);save();}
@@ -103,9 +103,26 @@ function finishPhase(){score+=100;pending=true;const token=generation;announce('
 if(round===2){completed=true;pending=false;running=false;render();save();return;}
 setTimeout(()=>{if(token===generation)enterNextPhase();},2200);}
 function tick(){if(!running||tutorialOn()||helpOpen||!root.isConnected)return;const previous={...pop};pop=step(pop);elapsed++;if(!completed&&!pending){stable=balance()?Math.min(goal,stable+1):Math.max(0,stable-1);}render(previous);if(!completed&&!pending&&stable===goal)finishPhase();else if(elapsed%5===0)save();}
+let resetOpen=false,resetWasRunning=false,resetFocus=null;
+const resetModal=$('[data-reset-modal]'),resetInput=$('[data-reset-input]'),resetConfirm=$('[data-reset-confirm]');
+function fitResetDialog(){if(!resetOpen)return;const v=window.visualViewport;resetModal.style.height=(v?.height||innerHeight)+'px';resetModal.style.top=(v?.offsetTop||0)+'px';}
+function updateResetMatch(){const matched=resetInput.value==='초기화합니다';resetConfirm.disabled=!matched;$('[data-reset-match]').textContent=matched?'확인됐어요. 아래 버튼을 누르면 모두 초기화돼요.':'위 문구를 입력하면 초기화 버튼이 켜져요.';}
+function openReset(){if(resetOpen)return;resetWasRunning=running;running=false;resetFocus=document.activeElement;resetOpen=true;resetInput.value='';updateResetMatch();render();resetModal.hidden=false;for(const el of root.children)if(el!==resetModal)el.inert=true;fitResetDialog();resetInput.focus({preventScroll:true});}
+function closeReset(resume=true){if(!resetOpen)return;resetOpen=false;resetModal.hidden=true;for(const el of root.children)if(el!==resetModal)el.inert=false;resetInput.value='';if(resume){running=resetWasRunning&&!document.hidden&&!matchMedia('(orientation:portrait)').matches;render();if(resetFocus?.isConnected)resetFocus.focus({preventScroll:true});}}
+function confirmReset(){if(!resetOpen||resetInput.value!=='초기화합니다')return;closeReset(false);try{localStorage.removeItem(storageKey);}catch{storageAvailable=false;}tutorialDone=false;web=true;reset();toast('초기화했어요. 조작 연습부터 다시 시작해요.');$('[data-tutorial-next]').focus({preventScroll:true});}
+resetInput.addEventListener('input',updateResetMatch);
+resetInput.addEventListener('compositionend',updateResetMatch);
+resetInput.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing){e.preventDefault();confirmReset();}});
+resetConfirm.addEventListener('click',confirmReset);
+$('[data-reset-cancel]').addEventListener('click',()=>closeReset());
+document.addEventListener('keydown',e=>{if(!resetOpen)return;if(e.key==='Escape'){e.preventDefault();closeReset();}else if(e.key==='Tab'){const controls=[...resetModal.querySelectorAll('input,button:not(:disabled)')],first=controls[0],last=controls.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+window.visualViewport?.addEventListener('resize',fitResetDialog);
+window.visualViewport?.addEventListener('scroll',fitResetDialog);
+window.addEventListener('resize',fitResetDialog);
+
 function toggle(){if(tutorialOn()||helpOpen)return;running=!running;render();toast(running?'LIVE! 숲이 움직이는 동안 먹이길을 바꿔주세요.':'일시정지 · 개체 게이지를 살펴보고 먹이길을 고칠 수 있어요.');save();}
 function heal(){if(charges<=0)return;const target=selected&&exists(selected)&&pop[selected]<50?selected:all.filter(exists).reduce((best,id)=>pop[id]<pop[best]?id:best,all.find(exists));if(pop[target]>=50)return;const previous={...pop};pop[target]=Math.min(60,pop[target]+20);charges--;render(previous);toast(`${data[target].name} 회복! 생명의 씨앗을 하나 썼어요.`);save();}
-$('[data-observe]').addEventListener('click',toggle);$('[data-retry]').addEventListener('click',()=>reset());$('[data-web]').addEventListener('click',()=>{web=!web;render();save();});$('[data-heal]').addEventListener('click',heal);$('[data-help]').addEventListener('click',showHelp);$('[data-close]').addEventListener('click',()=>{editing=false;selected=null;selectedEdge='';render();toast('동물 → 먹이로 연결 · 선을 눌러 수정');});
+$('[data-observe]').addEventListener('click',toggle);$('[data-retry]').addEventListener('click',openReset);$('[data-web]').addEventListener('click',()=>{web=!web;render();save();});$('[data-heal]').addEventListener('click',heal);$('[data-help]').addEventListener('click',showHelp);$('[data-close]').addEventListener('click',()=>{editing=false;selected=null;selectedEdge='';render();toast('동물 → 먹이로 연결 · 선을 눌러 수정');});
 $('[data-plus]').addEventListener('click',()=>adjustEdge(1));$('[data-minus]').addEventListener('click',()=>adjustEdge(-1));$('[data-disconnect]').addEventListener('click',disconnect);$('[data-retarget]').addEventListener('click',retarget);$('[data-line-close]').addEventListener('click',()=>{editing=false;selectedEdge='';edgeAnchor=null;render();});$('[data-tutorial-next]').addEventListener('click',guideNext);$('[data-tutorial-skip]').addEventListener('click',()=>finishTutorial(false));
 new ResizeObserver(()=>{for(const b of $('[data-species]').children)updateFlock(b,Math.round(pop[b.dataset.id]/10),data[b.dataset.id].sprite,true);draw();}).observe($('.fg-field'));
 const portrait=matchMedia('(orientation:portrait)');portrait.addEventListener('change',()=>{if(portrait.matches&&running){running=false;render();save();}});setInterval(tick,1000);document.addEventListener('visibilitychange',()=>{if(document.hidden&&running){running=false;render();toast('잠시 멈췄어요. ▶ 숲 시작으로 이어서 놀 수 있어요.');save();}});
