@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"><meta name="theme-color" content="#233c28"><meta name="description" content="먹이길을 연결하고 살아 움직이는 숲의 균형을 되찾는 초등학생용 먹이그물 게임."><title>숲을 잇다 · 먹이그물 게임</title><link rel="icon" href="./assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./styles.css?v=a3ff7b6a14e3"><script defer src="./game.js?v=a3ff7b6a14e3"></script></head><body><main id="forest-rescue">
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"><meta name="theme-color" content="#233c28"><meta name="description" content="숲·바다·초원에서 먹이길을 연결하고 생태계의 균형을 되찾는 초등학생용 먹이그물 게임."><title>먹이그물 탐험대 · 숲·바다·초원</title><link rel="icon" href="./assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./styles.css?v=44d855e76c82"><script defer src="./game.js?v=44d855e76c82"></script></head><body><main id="forest-rescue">
 <div class="fg-vignette"></div>
-<header class="fg-top"><div class="fg-brand"><span class="fg-subbrand">작은 숲 구조대</span>숲을 잇다</div><div class="fg-location">햇살 숲<span data-day>0일째</span></div><div class="fg-player"><div class="fg-player-row"><span>🌿 숲의 균형</span><span data-forest-value>88%</span></div><div class="fg-global-track" role="meter" aria-label="안정된 생물의 비율" aria-valuemin="0" aria-valuemax="100" aria-valuenow="88" data-forest-meter><i data-forest-bar></i></div><div class="fg-xp-line"><span>✦ 연결 점수 <b data-score>0</b></span><span data-seeds>생명의 씨앗 ✦ 2</span></div></div><div class="fg-mission"><span class="fg-mission-icon" aria-hidden="true">🌿</span><div><span class="fg-roundtag" data-round-label>위기 1 / 3</span><strong data-clue>배고픈 여우를 구해줘!</strong><small data-hint>먹이길 3개를 잇고 균형을 6초 유지</small><div class="fg-phases" aria-label="숲의 세 위기"><span data-phase="0" class="active">1</span><span data-phase="1">2</span><span data-phase="2">3</span></div></div></header>
+<header class="fg-top"><button type="button" class="fg-brand fg-map-button" data-habitat-menu><span class="fg-subbrand">먹이그물 탐험대</span><span data-brand-name>숲을 잇다</span><span class="fg-world-count" data-world-count>1 / 3 환경 · 지도 ▾</span></button><div class="fg-location">햇살 숲<span data-day>0일째</span></div><div class="fg-player"><div class="fg-player-row"><span>🌿 생태계 균형</span><span data-forest-value>88%</span></div><div class="fg-global-track" role="meter" aria-label="안정된 생물의 비율" aria-valuemin="0" aria-valuemax="100" aria-valuenow="88" data-forest-meter><i data-forest-bar></i></div><div class="fg-xp-line"><span>✦ 연결 점수 <b data-score>0</b></span><span data-seeds>생명의 씨앗 ✦ 2</span></div></div><div class="fg-mission"><span class="fg-mission-icon" aria-hidden="true">🌿</span><div><span class="fg-roundtag" data-round-label>위기 1 / 3</span><strong data-clue>배고픈 여우를 구해줘!</strong><small data-hint>먹이길 3개를 잇고 균형을 6초 유지</small><div class="fg-phases" aria-label="숲의 세 위기"><span data-phase="0" class="active">1</span><span data-phase="1">2</span><span data-phase="2">3</span></div></div></header>
 <!-- LIVE_HUD_START -->
 
 </div>
 <div class="fg-banner" data-banner hidden role="status" aria-live="polite"><strong data-banner-title></strong><span data-banner-detail></span></div>
-<section class="fg-tutorial" data-tutorial aria-label="게임 조작 연습"><span class="fg-guide-step" data-tutorial-step>처음 배우기</span><strong data-tutorial-title>숲을 살리는 방법</strong><div class="fg-guide-example" data-tutorial-example><div><i class="fg-guide-sprite fg-skin fox"></i><span>먹는 동물</span><b>여우</b></div><span class="fg-guide-arrow">→<small>먹는다</small></span><div><i class="fg-guide-sprite fg-skin rabbit"></i><span>먹이</span><b>토끼</b></div></div><p data-tutorial-body></p><div class="fg-rule-example" data-rule-example>
+<section class="fg-tutorial" data-tutorial aria-label="게임 조작 연습"><span class="fg-guide-step" data-tutorial-step>처음 배우기</span><strong data-tutorial-title>숲을 살리는 방법</strong><div class="fg-guide-example" data-tutorial-example><div><i class="fg-guide-sprite fg-skin fox"></i><span>먹는 동물</span><b>여우</b></div><span class="fg-guide-arrow">→<small>먹는다</small></span><div><i class="fg-guide-sprite fg-skin rabbit"></i><span>먹이</span><b>토끼</b></div></div><p data-tutorial-body></p><ul class="fg-practice-checks" data-practice-checks hidden></ul><div class="fg-rule-example" data-rule-example>
   <div class="fg-rule-sum"><span>기본 먹이<strong>2칸</strong></span><b>+</b><span>먹히는 양<strong>1칸</strong></span><b>=</b><span class="fg-rule-total">필요 먹이<strong>3칸</strong></span></div>
   <p>🐇 토끼가 1칸 먹히면, 먹이 3칸을 주세요.</p>
   <p>🌿 식물을 눌러 <strong>생산량</strong>도 늘릴 수 있어요.</p>
@@ -19,7 +19,7 @@
 <svg class="fg-web" role="img" aria-label="숲속 생물들을 잇는 먹이길"><defs><marker id="fg-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--gold)"></path></marker><marker id="fg-arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--danger)"></path></marker></defs><g data-lines></g><path class="fg-pending" data-pending hidden></path></svg>
 <div data-edge-handles></div><div data-species></div>
 </div>
-<div class="fg-inspect" data-inspect hidden><div class="fg-inspect-title"><span data-inspect-title></span><button type="button" class="fg-close" data-close>확인</button></div><div class="fg-inspect-details" data-inspect-details></div><div class="fg-supply-controls"><button type="button" class="fg-small" data-supply-minus aria-label="생산량 1칸 줄이기">−</button><strong data-supply-value>4칸</strong><button type="button" class="fg-small" data-supply-plus aria-label="생산량 1칸 늘리기">+</button></div><p>생산량이 늘면 식물 그림도 늘어요.</p></div>
+<div class="fg-inspect" data-inspect hidden><div class="fg-inspect-title"><span data-inspect-title></span><button type="button" class="fg-close" data-close>확인</button></div><div class="fg-inspect-details" data-inspect-details></div><div class="fg-supply-controls"><button type="button" class="fg-small" data-supply-minus aria-label="생산량 1칸 줄이기">−</button><strong data-supply-value>4칸</strong><button type="button" class="fg-small" data-supply-plus aria-label="생산량 1칸 늘리기">+</button></div><p>생산량이 늘면 생산자 그림도 늘어요.</p></div>
 <!-- LIVE_DOCK_START -->
 <div class="fg-dock"><div class="fg-status"><strong data-status>균형 유지 0 / 6초</strong><div class="fg-hold" data-hold-meter role="meter" aria-label="균형 유지 시간" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"><i data-hold-fill></i></div><div class="fg-toast" role="status" aria-live="polite" data-toast>동물 → 먹이로 연결 · 선을 눌러 수정</div></div><div class="fg-controls"><button type="button" class="fg-small cursor-interaction" data-web aria-pressed="true">먹이길 숨김</button><button type="button" class="fg-small cursor-interaction" data-help>조작법</button><button type="button" class="fg-small cursor-interaction" data-heal>✦ 회복 2</button><button type="button" class="fg-small cursor-interaction" data-retry aria-label="이 기기의 저장 기록 초기화">초기화</button><button type="button" class="fg-play cursor-interaction" data-observe aria-pressed="false">▶ 숲 시작</button></div></div>
 <!-- LIVE_DOCK_END -->
@@ -34,4 +34,22 @@
     <div class="fg-reset-actions"><button type="button" class="fg-small" data-reset-cancel>취소하고 돌아가기</button><button type="button" class="fg-reset-confirm" data-reset-confirm disabled>모두 초기화</button></div>
   </section>
 </div>
+<div class="fg-world-overlay" data-world-win hidden>
+ <section class="fg-world-win-card" role="dialog" aria-modal="true" aria-labelledby="fg-world-win-title">
+  <span class="fg-world-medal" aria-hidden="true">✦</span><span class="fg-world-kicker" data-world-win-kicker>첫 번째 생태계 완주</span>
+  <h2 id="fg-world-win-title" data-world-win-title>햇살 숲을 지켰어요!</h2><p data-world-win-body>다음 생태계로 출발할 준비가 됐어요.</p>
+  <div class="fg-next-preview" data-next-preview><span data-next-preview-name>푸른 바다</span></div>
+  <div class="fg-world-win-actions"><button type="button" class="fg-play" data-world-next>바다로 출발</button><button type="button" class="fg-small" data-world-free>이곳에서 자유 탐험</button></div>
+  <button type="button" class="fg-close" data-world-win-map>환경 지도 보기</button>
+ </section>
+</div>
+<div class="fg-world-overlay" data-world-menu hidden>
+ <section class="fg-world-map-card" role="dialog" aria-modal="true" aria-labelledby="fg-world-map-title">
+  <div class="fg-world-map-header"><div><span class="fg-world-kicker">먹이그물 탐험 지도</span><h2 id="fg-world-map-title">다음 생태계로 떠나요</h2></div><button type="button" class="fg-close" data-world-menu-close aria-label="환경 지도 닫기">✕</button></div>
+  <p>환경마다 세 번의 위기를 해결해요. 완료한 곳은 자유롭게 다시 탐험할 수 있어요.</p>
+  <div class="fg-world-cards" data-world-cards></div>
+  <p class="fg-world-map-progress" data-world-progress>0 / 3 생태계 완주</p>
+ </section>
+</div>
+<div class="fg-world-overlay fg-travel-overlay" data-world-travel hidden aria-live="polite"><div class="fg-travel-card"><span aria-hidden="true">✦</span><strong data-travel-title>다음 생태계로 이동 중…</strong><p>새로운 친구들을 만나러 가요.</p></div></div>
 </main><aside class="fg-rotate" aria-label="가로 화면 안내"><div><span aria-hidden="true">↻</span><h1>숲을 넓게 펼쳐주세요</h1><p>태블릿을 가로로 돌리면<br>모든 생물과 버튼이 한 화면에 보여요.</p></div></aside></body></html>
